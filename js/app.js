@@ -1,30 +1,23 @@
-// wait for DOM to load before running JS
 $(document).ready( function() {
-
-  // check to make sure JS is loaded
   console.log('JS is loaded!');
-//var url_link="https://developers.zomato.com/api/v2.1/cities";
-var url_link="https://api.tvmaze.com/shows?q=";
-  // your code here
-$("#search_btn").on('click',function(){
-//url_link=url_link+"?q="+$("#input_id").val();
-  alert(url_link);
-  //  e.preventDefault();
+  // indentation is off in this file – please reformat
+var url_link="https://api.tvmaze.com/shows";
+$("#search_btn").on('click',function(e){
+  e.preventDefault();
     $.ajax({
       method: 'GET',
       url: url_link,
       dataType: 'json',
-      data:$("form").serialize(),
+      data:$("form").serialize(), // this adds the q=yourSearchTerm to your url_link
       success: onSuccess,
-       error:onError
+      error:onError
     })
 });
 function onSuccess(data){
-  alert(url_link);
   console.log(data);
+  // need to add data to page, not just console.log it
 }
 function onError(data){
-  alert(`error :${data}`);
-//alert("error");
+  alert(`error :${JSON.stringify(data)}`);
 }
 });
